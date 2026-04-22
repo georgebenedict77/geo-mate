@@ -58,6 +58,34 @@ This repo is prepared for Render deployment with persistent storage:
 2. Add DNS records exactly as Render shows.
 3. Wait for SSL certificate to be issued automatically.
 
+## GitHub Pages Website
+
+This repo now includes a GitHub Pages workflow and public site entry at:
+
+- `docs/index.html`
+- `.github/workflows/pages.yml`
+
+After pushing to `main`, GitHub Pages publishes a public URL in this format:
+
+- `https://<your-github-username>.github.io/geo-mate/`
+
+The Pages site links users to the full live app (`Render`) for real matchmaking/auth.
+
+## Phone Install (PWA)
+
+The live app supports install on phone as a PWA:
+
+1. Open your live app URL on Android Chrome or iPhone Safari.
+2. Tap browser menu.
+3. Choose **Install app** (Chrome) or **Add to Home Screen** (Safari).
+4. GEO MATE appears on the phone like an app icon.
+
+Files added for this:
+
+- `public/manifest.webmanifest`
+- `public/sw.js`
+- Install button flow in `public/app.js` and `public/index.html`
+
 ## OTP Delivery Configuration
 
 Set environment variables before running if you want real OTP delivery.

@@ -8,6 +8,10 @@
       name="description"
       content="GEO MATE is building a better dating experience. Join the website waitlist and be the first to know when the app launches."
     />
+    <meta name="theme-color" content="#cb1f35" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="/assets/geo-mate-logo.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -49,6 +53,9 @@
           <div class="hero__actions">
             <a href="/auth" class="btn btn--primary">Create Account</a>
             <a href="/app" class="btn btn--ghost">Open Web App</a>
+            <button id="installAppBtn" class="btn btn--ghost btn-install-hidden" type="button">
+              Install on Phone
+            </button>
           </div>
           <div class="hero__stats">
             <article>

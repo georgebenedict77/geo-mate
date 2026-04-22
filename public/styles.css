@@ -176,9 +176,12 @@ body.ready .site {
   align-items: center;
   justify-content: center;
   text-decoration: none;
+  border: 0;
   border-radius: 13px;
   padding: 12px 16px;
+  font: inherit;
   font-weight: 700;
+  cursor: pointer;
 }
 
 .btn--primary {
@@ -190,6 +193,10 @@ body.ready .site {
   border: 1px solid var(--border);
   color: #263142;
   background: rgba(255, 255, 255, 0.9);
+}
+
+.btn-install-hidden {
+  display: none;
 }
 
 .hero__stats {

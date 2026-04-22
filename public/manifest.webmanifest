@@ -1,0 +1,19 @@
+{
+  "name": "GEO MATE",
+  "short_name": "GEO MATE",
+  "description": "Dating web app with onboarding, matching, and chat.",
+  "start_url": "/app",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#151922",
+  "theme_color": "#cb1f35",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/assets/geo-mate-logo.png",
+      "sizes": "567x567",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

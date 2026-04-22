@@ -416,6 +416,7 @@ function getContentType(extension) {
     ".svg": "image/svg+xml",
     ".webp": "image/webp",
     ".json": "application/json; charset=utf-8",
+    ".webmanifest": "application/manifest+json; charset=utf-8",
     ".ico": "image/x-icon"
   };
   return map[extension] || "application/octet-stream";
