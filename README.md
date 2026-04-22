@@ -38,6 +38,10 @@ This repo is prepared for Render deployment with persistent storage:
 4. Render will create `geo-mate-web` using `render.yaml`.
 5. After deploy, you get a public URL like `https://geo-mate-web.onrender.com`.
 
+One-click deploy shortcut:
+
+- `https://render.com/deploy?repo=https://github.com/georgebenedict77/geo-mate`
+
 ### 2. Keep It Running 24/7
 
 1. In Render service settings, keep plan on **Starter** or above.
