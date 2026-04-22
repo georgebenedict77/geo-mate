@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GEO MATE | Dating Website</title>
+    <meta
+      name="description"
+      content="GEO MATE is building a better dating experience. Join the website waitlist and be the first to know when the app launches."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div id="splash" class="splash" role="dialog" aria-label="GEO MATE launch">
+      <div class="splash__inner">
+        <img src="/assets/geo-mate-logo.png" alt="GEO MATE logo" class="splash__logo" />
+        <p class="splash__title">GEO MATE</p>
+      </div>
+    </div>
+
+    <main class="site">
+      <header class="header">
+        <a href="/" class="brand">
+          <img src="/assets/geo-mate-logo.png" alt="GEO MATE logo" />
+          <span>GEO MATE</span>
+        </a>
+        <nav class="nav">
+          <a href="#about">About</a>
+          <a href="#features">Features</a>
+          <a href="/auth">Sign In</a>
+          <a href="/app" class="nav-cta">Launch Web App</a>
+        </nav>
+      </header>
+
+      <section class="hero">
+        <div class="hero__content">
+          <p class="kicker">Full Web Dating Experience</p>
+          <h1>A dating platform designed for quality connections.</h1>
+          <p>
+            GEO MATE now runs as a complete dating website with onboarding, discovery,
+            matching, messaging, and profile management in-browser.
+          </p>
+          <div class="hero__actions">
+            <a href="/auth" class="btn btn--primary">Create Account</a>
+            <a href="/app" class="btn btn--ghost">Open Web App</a>
+          </div>
+          <div class="hero__stats">
+            <article>
+              <strong>Discovery + Swipes</strong>
+              <span>Smart compatibility recommendations</span>
+            </article>
+            <article>
+              <strong>Matches + Chat</strong>
+              <span>Message matched users in real-time style threads</span>
+            </article>
+          </div>
+        </div>
+        <div class="hero__card">
+          <p class="hero__card-label">Now Live on Web</p>
+          <h2>GEO MATE Platform</h2>
+          <p>Use all core features directly in the browser while mobile apps are prepared.</p>
+          <ul>
+            <li>Account creation with verification</li>
+            <li>Discover, match, and chat features</li>
+            <li>Profile and preference controls</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="about" class="section">
+        <h2>Why we are starting with website first</h2>
+        <div class="grid">
+          <article>
+            <h3>Better first impression</h3>
+            <p>A clear web presence builds trust and explains your vision before app install friction.</p>
+          </article>
+          <article>
+            <h3>Faster feedback</h3>
+            <p>Waitlist and onboarding insights help prioritize what users truly want in the app.</p>
+          </article>
+          <article>
+            <h3>Cleaner launch path</h3>
+            <p>Website conversion first, then app release with stronger product-market fit.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="features" class="section section--soft">
+        <h2>What GEO MATE focuses on</h2>
+        <div class="grid">
+          <article>
+            <h3>Authenticity</h3>
+            <p>Verified identity signals and lower fake profile exposure.</p>
+          </article>
+          <article>
+            <h3>Compatibility</h3>
+            <p>Match quality over infinite scrolling and random swiping.</p>
+          </article>
+          <article>
+            <h3>Experience</h3>
+            <p>Simple, modern interface that feels premium and easy to trust.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="waitlist" class="section section--waitlist">
+        <h2>Join the GEO MATE waitlist</h2>
+        <p>Get launch updates, new feature drops, and beta access reminders.</p>
+        <form id="waitlistForm" class="waitlist-form">
+          <input name="name" type="text" placeholder="Your name" required />
+          <input name="email" type="email" placeholder="you@example.com" required />
+          <button type="submit">Join</button>
+        </form>
+        <p id="waitlistStatus" class="waitlist-status" aria-live="polite"></p>
+      </section>
+
+      <footer class="footer">
+        <strong>GEO MATE</strong>
+        <span>Dating website platform with full core features.</span>
+      </footer>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

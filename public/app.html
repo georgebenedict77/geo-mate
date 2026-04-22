@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GEO MATE | Web App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/app.css" />
+  </head>
+  <body>
+    <main class="web-app">
+      <header class="topbar">
+        <a href="/" class="brand">
+          <img src="/assets/geo-mate-logo.png" alt="GEO MATE logo" />
+          <span>GEO MATE</span>
+        </a>
+        <div class="topbar__actions">
+          <span id="userBadge" class="user-badge">Member</span>
+          <button id="logoutBtn" type="button">Logout</button>
+        </div>
+      </header>
+
+      <nav class="tabs">
+        <button class="tab tab--active" data-tab="discover" type="button">Discover</button>
+        <button class="tab" data-tab="matches" type="button">Matches</button>
+        <button class="tab" data-tab="chat" type="button">Chat</button>
+        <button class="tab" data-tab="profile" type="button">Profile</button>
+      </nav>
+
+      <section id="discoverPanel" class="panel panel--active">
+        <div class="discover-actions">
+          <button id="refreshFeedBtn" type="button">Refresh Feed</button>
+          <button id="resetFeedBtn" type="button">Reset Swipes</button>
+        </div>
+        <div class="deck-wrap">
+          <div id="deck" class="deck"></div>
+          <div id="emptyState" class="empty empty--hidden">
+            <h2>No profiles right now</h2>
+            <p>Refresh your feed or reset swipes to explore again.</p>
+          </div>
+        </div>
+        <footer class="swipe-controls">
+          <button id="passBtn" class="btn btn--pass" type="button">Pass</button>
+          <button id="likeBtn" class="btn btn--like" type="button">Like</button>
+        </footer>
+      </section>
+
+      <section id="matchesPanel" class="panel">
+        <div class="panel-head">
+          <h2>Your Matches</h2>
+          <p>People you can message now.</p>
+        </div>
+        <ul id="matchesList" class="list"></ul>
+      </section>
+
+      <section id="chatPanel" class="panel">
+        <div class="chat-layout">
+          <aside class="chat-list-wrap">
+            <h2>Inbox</h2>
+            <ul id="inboxList" class="list"></ul>
+          </aside>
+          <div class="chat-thread">
+            <header id="chatHeader" class="chat-header">Select a match to start chatting.</header>
+            <div id="messages" class="messages"></div>
+            <form id="messageForm" class="composer">
+              <input id="messageInput" type="text" placeholder="Write a message..." />
+              <button type="submit">Send</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section id="profilePanel" class="panel">
+        <div class="panel-head">
+          <h2>Profile & Settings</h2>
+          <p>Update how people discover you.</p>
+        </div>
+        <form id="profileForm" class="profile-form">
+          <label>
+            Name
+            <input name="name" type="text" required />
+          </label>
+          <label>
+            Bio
+            <textarea name="bio" rows="3" placeholder="Tell people a bit about you"></textarea>
+          </label>
+          <div class="row row--double">
+            <label>
+              City
+              <input name="city" type="text" />
+            </label>
+            <label>
+              Occupation
+              <input name="occupation" type="text" />
+            </label>
+          </div>
+          <div class="interest-box">
+            <strong>Interests</strong>
+            <p>Choose and add interests (Tinder-style chips).</p>
+            <div class="interest-picker">
+              <select id="profileInterestSelect">
+                <option value="">Select interest</option>
+              </select>
+              <button id="profileAddInterestBtn" type="button">Add</button>
+            </div>
+            <div id="profileInterestTags" class="interest-tags"></div>
+            <input id="profileInterestsInput" name="interests" type="hidden" />
+          </div>
+          <div class="profile-box">
+            <strong>Profile photos</strong>
+            <p>Add up to 6 photos. Main photo appears in Discover and Chat.</p>
+            <div class="photo-inputs">
+              <input
+                id="profilePhotoUrlInput"
+                type="url"
+                placeholder="https://example.com/profile-photo.jpg"
+              />
+              <button id="profileAddPhotoUrlBtn" type="button">Add URL</button>
+            </div>
+            <input id="profilePhotoFileInput" type="file" accept="image/*" multiple />
+            <div id="profilePhotoPreview" class="photo-preview"></div>
+          </div>
+          <div class="location-box">
+            <div>
+              <strong>Geolocation</strong>
+              <p id="profileLocationHint">No precise location set yet.</p>
+            </div>
+            <button id="profileUseLocationBtn" type="button">Use current location</button>
+          </div>
+          <label>
+            Relationship intent
+            <select name="relationshipIntent">
+              <option value="long_term">Long-term</option>
+              <option value="casual">Casual</option>
+              <option value="friendship">Friendship</option>
+            </select>
+          </label>
+          <div class="row row--triple">
+            <label>
+              Min age
+              <input name="minAgePreferred" type="number" min="18" />
+            </label>
+            <label>
+              Max age
+              <input name="maxAgePreferred" type="number" min="18" />
+            </label>
+            <label>
+              Distance km
+              <input name="maxDistanceKm" type="number" min="1" />
+            </label>
+          </div>
+          <button class="btn btn--primary btn--full" type="submit">Save Profile</button>
+        </form>
+      </section>
+
+      <p id="status" class="status" aria-live="polite"></p>
+    </main>
+
+    <script src="/app-client.js"></script>
+  </body>
+</html>

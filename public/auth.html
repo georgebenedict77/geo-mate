@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GEO MATE | Account Access</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Sora:wght@500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/auth.css" />
+  </head>
+  <body>
+    <main class="auth-page">
+      <section class="auth-side">
+        <a href="/" class="brand">
+          <img src="/assets/geo-mate-logo.png" alt="GEO MATE logo" />
+          <span>GEO MATE</span>
+        </a>
+        <p class="eyebrow">Premium Onboarding</p>
+        <h1>Sign up with real verification, photos, and location.</h1>
+        <p>
+          Build a trusted profile from day one with email + phone verification,
+          photo setup, and geolocation for better nearby matching.
+        </p>
+        <ul>
+          <li>Real OTP delivery integrations (email + SMS)</li>
+          <li>Photo selector and profile details</li>
+          <li>Location-aware matchmaking</li>
+        </ul>
+      </section>
+
+      <section class="auth-main">
+        <div class="auth-tabs">
+          <button type="button" data-tab="join" class="tab tab--active">Create Account</button>
+          <button type="button" data-tab="login" class="tab">Sign In</button>
+        </div>
+
+        <section id="joinPanel" class="panel">
+          <header class="panel-head">
+            <h2>Account setup</h2>
+            <p>Complete the steps to activate your GEO MATE profile.</p>
+          </header>
+
+          <ol class="stepper">
+            <li data-step-index="1" class="stepper__item stepper__item--active">Account</li>
+            <li data-step-index="2" class="stepper__item">Profile</li>
+            <li data-step-index="3" class="stepper__item">Verify</li>
+          </ol>
+
+          <form id="joinForm" novalidate>
+            <div data-step="1" class="form-step form-step--active">
+              <label>
+                Full name
+                <input name="name" type="text" placeholder="Jane Doe" required />
+              </label>
+              <label>
+                Email address
+                <input name="email" type="email" placeholder="you@example.com" required />
+              </label>
+              <label>
+                Phone number
+                <input name="phone" type="tel" placeholder="+254700000000" required />
+              </label>
+              <label>
+                Password
+                <input name="password" type="password" minlength="8" required />
+              </label>
+              <label>
+                Birth date
+                <input name="birthDate" type="date" required />
+              </label>
+            </div>
+
+            <div data-step="2" class="form-step">
+              <label>
+                Your gender
+                <select name="gender" required>
+                  <option value="female">Female</option>
+                  <option value="male">Male</option>
+                  <option value="non_binary">Non-binary</option>
+                </select>
+              </label>
+              <fieldset>
+                <legend>Looking for</legend>
+                <label class="inline-choice"
+                  ><input type="checkbox" name="lookingForGenders" value="female" /> Female</label
+                >
+                <label class="inline-choice"
+                  ><input type="checkbox" name="lookingForGenders" value="male" /> Male</label
+                >
+                <label class="inline-choice"
+                  ><input type="checkbox" name="lookingForGenders" value="non_binary" />
+                  Non-binary</label
+                >
+              </fieldset>
+              <label>
+                Bio
+                <textarea name="bio" rows="3" placeholder="Tell people about yourself"></textarea>
+              </label>
+              <div class="row row--double">
+                <label>
+                  City
+                  <input name="city" type="text" placeholder="Nairobi" />
+                </label>
+                <label>
+                  Occupation
+                  <input name="occupation" type="text" placeholder="Designer, Engineer..." />
+                </label>
+              </div>
+              <div class="interest-box">
+                <strong>Interests</strong>
+                <p>Choose from dropdown and click Add.</p>
+                <div class="interest-picker">
+                  <select id="interestSelect">
+                    <option value="">Select interest</option>
+                  </select>
+                  <button id="addInterestBtn" type="button">Add</button>
+                </div>
+                <div id="interestTags" class="interest-tags"></div>
+                <input name="interests" type="hidden" />
+              </div>
+              <label>
+                Relationship intent
+                <select name="relationshipIntent">
+                  <option value="long_term">Long-term</option>
+                  <option value="casual">Casual</option>
+                  <option value="friendship">Friendship</option>
+                </select>
+              </label>
+              <div class="row row--triple">
+                <label>
+                  Min age
+                  <input name="minAgePreferred" type="number" min="18" value="21" />
+                </label>
+                <label>
+                  Max age
+                  <input name="maxAgePreferred" type="number" min="18" value="45" />
+                </label>
+                <label>
+                  Distance (km)
+                  <input name="maxDistanceKm" type="number" min="1" value="30" />
+                </label>
+              </div>
+
+              <div class="location-box">
+                <div>
+                  <strong>Geolocation</strong>
+                  <p id="locationHint">No location selected yet.</p>
+                </div>
+                <button id="useLocationBtn" type="button">Use current location</button>
+              </div>
+
+              <div class="photo-box">
+                <strong>Profile photos</strong>
+                <p>Add up to 6 photos (URL or upload).</p>
+                <div class="photo-inputs">
+                  <input id="photoUrlInput" type="url" placeholder="https://example.com/photo.jpg" />
+                  <button id="addPhotoUrlBtn" type="button">Add URL</button>
+                </div>
+                <input id="photoFileInput" type="file" accept="image/*" multiple />
+                <div id="photoPreview" class="photo-preview"></div>
+              </div>
+            </div>
+
+            <div data-step="3" class="form-step">
+              <div class="verify-hint">
+                <strong>Verify your account</strong>
+                <p>Enter the OTP sent to your email and phone to activate sign in.</p>
+                <p id="deliveryStatus" class="delivery-status"></p>
+              </div>
+              <div class="row row--verify">
+                <label>
+                  Email code
+                  <input id="emailCodeInput" type="text" maxlength="6" placeholder="6-digit code" />
+                </label>
+                <button id="verifyEmailBtn" type="button">Verify email</button>
+              </div>
+              <div class="row row--verify">
+                <label>
+                  Phone code
+                  <input id="phoneCodeInput" type="text" maxlength="6" placeholder="6-digit code" />
+                </label>
+                <button id="verifyPhoneBtn" type="button">Verify phone</button>
+              </div>
+              <div class="code-actions">
+                <button id="resendEmailCode" type="button">Resend email code</button>
+                <button id="resendPhoneCode" type="button">Resend phone code</button>
+              </div>
+              <div id="devCodes" class="dev-codes dev-codes--hidden"></div>
+            </div>
+          </form>
+
+          <div class="wizard-actions">
+            <button id="backBtn" type="button" class="btn btn--ghost">Back</button>
+            <button id="nextBtn" type="button" class="btn btn--primary">Continue</button>
+          </div>
+        </section>
+
+        <section id="loginPanel" class="panel panel--hidden">
+          <header class="panel-head">
+            <h2>Sign in</h2>
+            <p>Use your email or phone and password to continue.</p>
+          </header>
+          <form id="loginForm">
+            <label>
+              Email or phone
+              <input name="identifier" type="text" required />
+            </label>
+            <label>
+              Password
+              <input name="password" type="password" required />
+            </label>
+            <button class="btn btn--primary btn--full" type="submit">Sign In</button>
+          </form>
+        </section>
+
+        <p id="status" class="status" aria-live="polite"></p>
+      </section>
+    </main>
+
+    <script src="/auth.js"></script>
+  </body>
+</html>
