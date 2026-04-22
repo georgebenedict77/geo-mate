@@ -60,12 +60,16 @@ This repo is prepared for Render deployment with persistent storage:
 
 ## GitHub Pages Website
 
-This repo now includes a GitHub Pages workflow and public site entry at:
+This repo now includes a public site entry at:
 
 - `docs/index.html`
-- `.github/workflows/pages.yml`
 
-After pushing to `main`, GitHub Pages publishes a public URL in this format:
+In GitHub repo settings, set Pages source to:
+
+- Branch: `main`
+- Folder: `/docs`
+
+Then GitHub Pages publishes a public URL in this format:
 
 - `https://<your-github-username>.github.io/geo-mate/`
 
