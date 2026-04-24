@@ -30,6 +30,7 @@ GEO MATE provides:
 
 - Public website (GitHub Pages): https://georgebenedict77.github.io/geo-mate/
 - Source code: https://github.com/georgebenedict77/geo-mate
+- Latest release: https://github.com/georgebenedict77/geo-mate/releases
 - One-click backend deploy (Render): https://render.com/deploy?repo=https://github.com/georgebenedict77/geo-mate
 
 ## Screenshots And Demo Media
@@ -83,9 +84,9 @@ npm start
 
 Open:
 
-- `http://localhost:3000/` landing website
-- `http://localhost:3000/auth` onboarding/sign-in
-- `http://localhost:3000/app` dating app
+- `http://localhost:3050/` landing website
+- `http://localhost:3050/auth` onboarding/sign-in
+- `http://localhost:3050/app` dating app
 
 ## Quality Gates
 
@@ -157,4 +158,6 @@ Production safety:
 
 - Changelog: `CHANGELOG.md`
 - License: `LICENSE`
-- Release notes: `docs/releases/v1.1.0.md`
+- Release notes:
+  - `docs/releases/v1.1.0.md`
+  - `docs/releases/v1.1.1.md`

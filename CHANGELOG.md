@@ -2,6 +2,18 @@
 
 All notable changes to this project are documented in this file.
 
+## [1.1.1] - 2026-04-24
+
+### Fixed
+
+- Launch reliability on local environments by defaulting server runtime to `PORT=3050`.
+- Added built-in `.env` file loading so local configuration is applied automatically.
+
+### Improved
+
+- Updated README run instructions to match real default launch port and latest release link.
+- Published formal GitHub Release object for portfolio presentation.
+
 ## [1.1.0] - 2026-04-24
 
 ### Added

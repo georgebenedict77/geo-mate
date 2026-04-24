@@ -10,6 +10,8 @@ const {
   sendVerificationSms
 } = require("./verificationDelivery");
 
+loadEnvFile();
+
 const DATA_DIR = path.resolve(process.env.DATA_DIR || path.join(__dirname, "..", "data"));
 const store = new DatingStore();
 const authStore = new AuthStore({
@@ -25,7 +27,7 @@ for (const user of authStore.listUsers()) {
   syncAuthUserToDatingProfile(user.id);
 }
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3050;
 const PUBLIC_DIR = path.join(__dirname, "..", "public");
 const WAITLIST_FILE = path.join(DATA_DIR, "waitlist.json");
 
@@ -680,4 +682,33 @@ function seedDiscoveryProfiles(localStore) {
       lastActiveAt: now - 45 * 60 * 1000
     }
   ].forEach((profile) => localStore.addProfile(profile));
+}
+
+function loadEnvFile() {
+  const envFile = path.resolve(process.cwd(), ".env");
+  if (!fs.existsSync(envFile)) return;
+
+  const lines = fs.readFileSync(envFile, "utf-8").split(/\r?\n/);
+  for (const line of lines) {
+    const trimmed = String(line || "").trim();
+    if (!trimmed || trimmed.startsWith("#")) continue;
+
+    const separatorIndex = trimmed.indexOf("=");
+    if (separatorIndex <= 0) continue;
+
+    const key = trimmed.slice(0, separatorIndex).trim();
+    let value = trimmed.slice(separatorIndex + 1).trim();
+
+    if (!/^[A-Za-z_][A-Za-z0-9_]*$/.test(key)) continue;
+    if (
+      (value.startsWith('"') && value.endsWith('"')) ||
+      (value.startsWith("'") && value.endsWith("'"))
+    ) {
+      value = value.slice(1, -1);
+    }
+
+    if (process.env[key] === undefined) {
+      process.env[key] = value;
+    }
+  }
 }
