@@ -1,12 +1,15 @@
 {
   "name": "velocity-dating-engine",
-  "version": "0.1.0",
+  "version": "1.1.0",
   "private": true,
   "description": "High-efficiency dating app backend starter focused on recommendation quality and low latency.",
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
-    "dev": "node src/server.js"
+    "dev": "node src/server.js",
+    "check:syntax": "node scripts/check-syntax.js",
+    "test:smoke": "node scripts/smoke-test.js",
+    "ci": "npm run check:syntax && npm run test:smoke"
   },
   "engines": {
     "node": ">=18.0.0"

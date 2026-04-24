@@ -1,138 +1,160 @@
-# GEO MATE (Full Web Platform)
+# GEO MATE
 
-GEO MATE now runs as a full-featured dating website experience with:
+GEO MATE is a modern web-first dating product focused on trust, quality matching, and smooth onboarding.
 
-- Website landing and marketing pages
-- Account creation and authentication
-- Discovery/swipe flow
-- Match generation
-- In-browser messaging between matches
-- Profile and preference management
-- Waitlist signup endpoint
+## Product Positioning
 
-## Run
+- Category: Consumer social/dating platform
+- Wedge: Geo-aware matching + verified onboarding + lightweight in-browser app
+- Experience: Tinder/Bumble-style flow adapted for a complete web product and phone-installable PWA
+
+## Problem
+
+Most dating products struggle with:
+
+- low-trust onboarding and fake accounts
+- random swipe fatigue vs meaningful compatibility
+- weak cross-device experience unless users install a native app
+
+## Solution
+
+GEO MATE provides:
+
+- multi-step onboarding with email + phone verification
+- profile quality signals (photos, interests, location, intent)
+- recommendation ranking engine with compatibility/recency/trust/fairness factors
+- swipe, match, and real-time style messaging flow
+- PWA install support for phone home-screen usage
+
+## Live Demo
+
+- Public website (GitHub Pages): https://georgebenedict77.github.io/geo-mate/
+- Source code: https://github.com/georgebenedict77/geo-mate
+- One-click backend deploy (Render): https://render.com/deploy?repo=https://github.com/georgebenedict77/geo-mate
+
+## Screenshots And Demo Media
+
+### Landing
+
+![GEO MATE Landing](docs/media/home.png)
+
+### Onboarding
+
+![GEO MATE Auth](docs/media/auth.png)
+
+### In-App Experience
+
+![GEO MATE App](docs/media/app.png)
+
+### Demo GIF
+
+![GEO MATE Demo](docs/media/geo-mate-demo.gif)
+
+## Architecture
+
+```mermaid
+flowchart LR
+  A["Web Client (Landing/Auth/App)"] --> B["Node.js HTTP Server"]
+  B --> C["AuthStore (users/sessions/OTP)"]
+  B --> D["DatingStore (profiles/swipes/matches)"]
+  B --> E["ChatStore (threads/messages)"]
+  C --> F["JSON Persistence (DATA_DIR)"]
+  D --> F
+  E --> F
+  B --> G["OTP Providers (Resend/SendGrid/Twilio)"]
+```
+
+## Core Capabilities
+
+- Landing website + waitlist
+- Account creation and sign-in
+- Email + phone OTP verification
+- Discover / swipe / match loop
+- Inbox + thread messaging
+- Profile management (photos, interests, location, intent)
+- PWA install support (`manifest.webmanifest` + service worker)
+
+## Local Setup
 
 ```bash
+npm install
 npm start
 ```
 
 Open:
 
 - `http://localhost:3000/` landing website
-- `http://localhost:3000/auth` account onboarding/sign-in
-- `http://localhost:3000/app` web dating app
+- `http://localhost:3000/auth` onboarding/sign-in
+- `http://localhost:3000/app` dating app
 
-## Go Live (Public URL + 24/7 + OTP)
+## Quality Gates
 
-This repo is prepared for Render deployment with persistent storage:
+- Syntax checks across `src`, `public`, and `scripts`
+- Smoke test that boots server and validates critical flows
 
-- Blueprint file: `render.yaml`
-- Persistent user data path: `DATA_DIR` (mounted to `/var/data` in Render)
-- Health check route: `/health`
+Run locally:
 
-### 1. Host Online (Public URL)
+```bash
+npm run ci
+```
 
-1. Push this project to GitHub.
-2. In Render, click **New +** -> **Blueprint**.
-3. Select this repository and deploy.
-4. Render will create `geo-mate-web` using `render.yaml`.
-5. After deploy, you get a public URL like `https://geo-mate-web.onrender.com`.
+CI pipeline:
 
-One-click deploy shortcut:
+- `.github/workflows/ci.yml`
 
-- `https://render.com/deploy?repo=https://github.com/georgebenedict77/geo-mate`
+## Deployment (Public URL + 24/7)
 
-### 2. Keep It Running 24/7
+This repo ships with `render.yaml` for Render blueprint deployment.
 
-1. In Render service settings, keep plan on **Starter** or above.
-2. Keep auto-deploy on.
-3. Confirm disk `geo-mate-data` is mounted to `/var/data`.
-4. Never delete the disk unless you intentionally want to erase user data.
+1. Push to GitHub.
+2. Create a Render Blueprint service from repo.
+3. Keep `DATA_DIR=/var/data` and mounted disk.
+4. Use Starter+ plan for always-on service.
+5. Configure custom domain in Render.
 
-### 3. Real Email + SMS OTP
+## OTP Provider Setup
 
-1. Add environment variables in Render (from `.env.example`).
-2. Choose one email provider (`resend` or `sendgrid`).
-3. Set `SMS_PROVIDER=twilio` and Twilio credentials.
-4. Keep `SHOW_DEV_CODES=false` in production.
+Use `.env.example` as template.
 
-### Custom Domain
+Email (choose one):
 
-1. In Render -> Settings -> Custom Domains, add your domain.
-2. Add DNS records exactly as Render shows.
-3. Wait for SSL certificate to be issued automatically.
-
-## GitHub Pages Website
-
-This repo now includes a public site entry at:
-
-- `docs/index.html`
-
-In GitHub repo settings, set Pages source to:
-
-- Branch: `main`
-- Folder: `/docs`
-
-Then GitHub Pages publishes a public URL in this format:
-
-- `https://<your-github-username>.github.io/geo-mate/`
-
-The Pages site links users to the full live app (`Render`) for real matchmaking/auth.
-
-## Phone Install (PWA)
-
-The live app supports install on phone as a PWA:
-
-1. Open your live app URL on Android Chrome or iPhone Safari.
-2. Tap browser menu.
-3. Choose **Install app** (Chrome) or **Add to Home Screen** (Safari).
-4. GEO MATE appears on the phone like an app icon.
-
-Files added for this:
-
-- `public/manifest.webmanifest`
-- `public/sw.js`
-- Install button flow in `public/app.js` and `public/index.html`
-
-## OTP Delivery Configuration
-
-Set environment variables before running if you want real OTP delivery.
-Use [.env.example](./.env.example) as your template.
-
-Email (choose one provider):
-
-- Resend
-  - `EMAIL_PROVIDER=resend`
-  - `RESEND_API_KEY=...`
-  - `EMAIL_FROM=verified@yourdomain.com`
-- SendGrid
-  - `EMAIL_PROVIDER=sendgrid`
-  - `SENDGRID_API_KEY=...`
-  - `EMAIL_FROM=verified@yourdomain.com`
+- `EMAIL_PROVIDER=resend` + `RESEND_API_KEY` + `EMAIL_FROM`
+- `EMAIL_PROVIDER=sendgrid` + `SENDGRID_API_KEY` + `EMAIL_FROM`
 
 SMS:
 
-- Twilio
-  - `SMS_PROVIDER=twilio`
-  - `TWILIO_ACCOUNT_SID=...`
-  - `TWILIO_AUTH_TOKEN=...`
-  - `TWILIO_FROM_NUMBER=+1XXXXXXXXXX`
+- `SMS_PROVIDER=twilio`
+- `TWILIO_ACCOUNT_SID`
+- `TWILIO_AUTH_TOKEN`
+- `TWILIO_FROM_NUMBER`
 
-Optional:
+Production safety:
 
-- `APP_NAME=GEO MATE`
-- `SHOW_DEV_CODES=true` to always return codes in API responses (dev only).
+- `NODE_ENV=production`
+- `SHOW_DEV_CODES=false`
 
-## Core API routes
+## API Surface
 
 - `POST /waitlist`
 - `POST /auth/register`
 - `POST /auth/login`
+- `POST /auth/refresh`
+- `POST /auth/logout`
 - `GET /auth/me`
 - `POST /auth/profile`
+- `POST /auth/send-email-code`
+- `POST /auth/send-phone-code`
+- `POST /auth/verify-email`
+- `POST /auth/verify-phone`
 - `POST /recommendations`
 - `POST /swipe`
 - `GET /matches`
 - `GET /inbox`
 - `GET /messages?with=<userId>`
 - `POST /messages`
+
+## Release And Governance
+
+- Changelog: `CHANGELOG.md`
+- License: `LICENSE`
+- Release notes: `docs/releases/v1.1.0.md`
